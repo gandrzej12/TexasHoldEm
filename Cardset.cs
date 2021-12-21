@@ -135,12 +135,15 @@ public class Cardest
     private bool CheckIfThree(){
         throw new NotImplementedException();
         bool thereIsThree=false;       
-        for(int i = 0; i < numberOfCards.Count; i++){
+        for(int i = 1; i < numberOfCards.Count; i++){
             if(numberOfCards[i]==3){
                 WhichNumberOfThree=i+1;
                 thereIsThree=true;
-                //return true;
             }
+        }
+        if(numberOfCards[0]==3){//Aces
+                WhichNumberOfThree=1;
+                thereIsThree=true;
         }
         return thereIsThree;
     }
