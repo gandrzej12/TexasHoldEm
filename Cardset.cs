@@ -8,9 +8,12 @@ public class Cardest
     private List<Card> allCards = new List<Card>();
     //private List<Card> specifiedCards = new List<Card>();
 
-    private int value = 0;
-    private int level = 0;
+    //private int value = 0;
+    //private int level = 0;
+
     private CardSymbol symbolIfColor;
+    int StrenghtOfStreigh = 0;
+    int WhichNumberOfFour=99;
 
     private List<int> numberOfCards = new List<int>();
 
@@ -36,6 +39,8 @@ public class Cardest
         }
     }
 
+    //Kolor po polsku: ten sam znaczek
+    //Powinno działać dobrze
     private bool CheckIfColor()
     {
         byte needClubs = 0;
@@ -79,12 +84,11 @@ public class Cardest
         return false;
     }
 
-    int StrenghtOfStreigh = 0;
+    
     //Strit po polsku: po kolei
     //Powinno działać dobrze
+    //sprawdz scenariusz z asem najmniejszy i najwiekszy
     private bool CheckIfStreigh(){
-        throw new NotImplementedException();
-        //sprawdz scenariusz z asem najmniejszy i najwiekszy
         StrenghtOfStreigh = 0;
         for(int i = 0; 4+i <13;i++){
             if(
@@ -111,6 +115,20 @@ public class Cardest
         return false;    
     }
 
+    
+    //Kareta po polsku: cztery takie same figury
+    private bool CheckIfFour(){
+        throw new NotImplementedException();
+        for(int i = 0; i < numberOfCards.Count; i++){
+            if(numberOfCards[i]==4){
+                WhichNumberOfFour=i+1;
+                return true;
+            }
+        }
+        WhichNumberOfFour=99;
+        return false;
+    }
+
     private bool CheckIfPair(){
         throw new NotImplementedException();
         for(int i=0; i <numberOfCards.Count;i++){
@@ -122,6 +140,8 @@ public class Cardest
             }
         }
     }
+
+    
 
 
 
