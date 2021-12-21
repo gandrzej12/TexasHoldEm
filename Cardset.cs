@@ -118,6 +118,7 @@ public class Cardest
 
     
     //Kareta po polsku: cztery takie same figury
+    //ok bo moze istniec tylko jedna czworka
     private bool CheckIfFour(){
         throw new NotImplementedException();
         for(int i = 0; i < numberOfCards.Count; i++){
@@ -133,14 +134,18 @@ public class Cardest
     //zostanie najsilniejsza trojka
     private bool CheckIfThree(){
         throw new NotImplementedException();
+        bool thereIsThree=false;       
         for(int i = 0; i < numberOfCards.Count; i++){
             if(numberOfCards[i]==3){
                 WhichNumberOfThree=i+1;
-                return true;
+                thereIsThree=true;
+                //return true;
             }
         }
+        return thereIsThree;
     }
 
+    //not implemented 4 real
     private bool CheckIfPair(){
         throw new NotImplementedException();
         for(int i=0; i <numberOfCards.Count;i++){
