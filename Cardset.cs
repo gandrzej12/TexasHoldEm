@@ -13,7 +13,8 @@ public class Cardest
 
     private CardSymbol symbolIfColor;
     int StrenghtOfStreigh = 0;
-    int WhichNumberOfFour=99;
+    int WhichNumberOfFour=99;//zmienic na byte? ustawiac null zamiast 99
+    int WhichNumberOfThree=99;//zmienic na byte? ustawiac null zamiast 99
 
     private List<int> numberOfCards = new List<int>();
 
@@ -127,6 +128,17 @@ public class Cardest
         }
         WhichNumberOfFour=99;
         return false;
+    }
+
+    //zostanie najsilniejsza trojka
+    private bool CheckIfThree(){
+        throw new NotImplementedException();
+        for(int i = 0; i < numberOfCards.Count; i++){
+            if(numberOfCards[i]==3){
+                WhichNumberOfThree=i+1;
+                return true;
+            }
+        }
     }
 
     private bool CheckIfPair(){

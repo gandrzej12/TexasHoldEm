@@ -7,6 +7,9 @@ https://www.geeksforgeeks.org/shuffle-a-deck-of-cards-3/
 nuget library, will use in future to create some GUI
 https://www.nuget.org/packages/Terminal.Gui/
 
+power of specified sets
+https://holdemshop.pl/blog/news/poker-uklady-hierarchia-kart-w-texas-holdem
+
 TODO's:
 klasa gra?
 klasa układ?: lista na 7kart?
