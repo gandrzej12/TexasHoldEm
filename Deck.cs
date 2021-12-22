@@ -8,7 +8,7 @@ public class Deck
     private Queue<Card> queue=new Queue<Card>();
 
     private void addCardsWithSymbol(CardSymbol symbol){
-        for (var i = 1; i <= 13; i++)
+        for (var i = 2; i <= 14; i++)
         {
             list.Add(new Card(symbol, i));
         }

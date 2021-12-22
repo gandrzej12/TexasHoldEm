@@ -6,14 +6,15 @@ public class Cardest
 {
     //z setu allCards tworzymy zbiory dla specifiedCards
     private List<Card> allCards = new List<Card>();
-    //private List<Card> specifiedCards = new List<Card>();
-
-    //private int value = 0;
+    private List<Card> choosenCards = new List<Card>();
     //private int level = 0;
 
     private CardSymbol symbolIfColor;
+
     int StrenghtOfStreigh = 0;
+
     int WhichNumberOfFour = 99;//zmienic na byte? ustawiac null zamiast 99
+
     int WhichNumberOfThree = 99;//zmienic na byte? ustawiac null zamiast 99
 
     private byte? FirstPairNumber = null;
@@ -25,6 +26,7 @@ public class Cardest
 
     private void InitializeNumbers()
     {
+        numberOfCards.Clear();
         for (int i = 0; i < 13; i++)
         {
             numberOfCards.Add(0);
@@ -45,6 +47,10 @@ public class Cardest
         }
     }
 
+    private void SaveTheStrongestCardsFromColor(CardSymbol symbol){
+        throw new NotImplementedException();
+        //LINQ? 
+    }
     //Kolor po polsku: ten sam znaczek
     //Powinno działać dobrze
     private bool CheckIfColor()
@@ -74,6 +80,7 @@ public class Cardest
         if (needClubs >= 5)
         {
             symbolIfColor = CardSymbol.CLUB;
+
             return true;
         }
         if (needDiamonds >= 5)
@@ -168,7 +175,7 @@ public class Cardest
         return thereIsThree;
     }
 
-    //not implemented 4 real
+    //zapamietaj 3 najmocniejsze 2ki, w puli 7 kart moze byc max 3 2ki
     private bool CheckIfPair()
     {
         throw new NotImplementedException();
@@ -220,7 +227,10 @@ public class Cardest
     }
 
 
+    private bool CheckHighestCard(){
+        throw new NotImplementedException();
 
+    }
 
 
 

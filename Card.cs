@@ -24,7 +24,7 @@ namespace TexasHoldEm
 
         public Card(CardSymbol symbol, int number)
         {
-            if (number > 13 || number <= 0)
+            if (number > 14 || number <2)
             {
                 throw new Exception("Wrong value during card creation");
             }
@@ -46,10 +46,7 @@ namespace TexasHoldEm
             }
             this.Number = number;
             switch (number)
-            {
-                case 1:
-                    this.Graphics = "A";
-                    break;
+            {          
                 case 11:
                     this.Graphics = "J";
                     break;
@@ -58,6 +55,9 @@ namespace TexasHoldEm
                     break;
                 case 13:
                     this.Graphics = "K";
+                    break;
+                case 14:
+                    this.Graphics = "A";
                     break;
                 default:
                     this.Graphics = number.ToString();
