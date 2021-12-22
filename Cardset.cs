@@ -25,9 +25,32 @@ public class Cardest
     byte threeLevel3 = 0;
     byte threeLevel4 = 0;
 
+    //section Pairs
     private byte? firstPairNumber = null;
     private byte? secondPairNumber = null;
     private byte? thirdPairNumber = null;
+
+    private byte? onePairLevel1 = 0;//if there is a pair
+    private byte? onePairLevel2 = 0;//the strongest pair str
+    private byte? onePairLevel3 = 0;//1st strongest card
+    private byte? onePairLevel4 = 0;//2nd strongest card
+    private byte? onePairLevel5 = 0;//3rd strongest card
+
+    private byte? twoPairLevel1 = 0;//if there is 2 pairs
+    private byte? twoPairLevel2 = 0;//stronger pair
+    private byte? twoPairLevel3 = 0;//lower pair
+    private byte? twoPairLevel4 = 0;//strongest card
+
+    //end of pairs
+
+    //High Card section -----------------------------------------------------------
+    private byte? HighestCardLevel1 = 0;
+    private byte? HighestCardLevel2 = 0;
+    private byte? HighestCardLevel3 = 0;
+    private byte? HighestCardLevel4 = 0;
+    private byte? HighestCardLevel5 = 0;
+    private byte? HighestCardLevel6 = 0;
+    //End of High Card section ----------------------------------------------------
 
     private void InitializeNumbers()
     {
@@ -57,6 +80,7 @@ public class Cardest
     //good test case: 7karo in different positions
     private byte GetStrengthOfColor(CardSymbol? symbol)
     {
+        throw new NotImplementedException();//bo trzeba ziamplementowac levele kazdy na poszczegolna karte aaaaaaaaaaa
         if (symbol == null) { throw new ArgumentNullException("symbol"); }
         byte strength = 0;
         var fiveHighestCards = (from card in allCards
@@ -65,7 +89,7 @@ public class Cardest
                                 select card).Take(5);
         foreach (var card in fiveHighestCards)
         {
-            strength += card.Number;
+            strength += card.Number;// we cannot sum here, need to repair it later
         }
         return strength;
     }
@@ -167,22 +191,25 @@ public class Cardest
     }
 
 
-    private bool CheckIfFour(){
-        byte tempFourStrength= CheckFourKind();
-        if(tempFourStrength>0){
-            fourWhichKind=tempFourStrength;
-            fourLastCardStrength=CheckFourLastCard(fourWhichKind);
+    private bool CheckIfFour()
+    {
+        byte tempFourStrength = CheckFourKind();
+        if (tempFourStrength > 0)
+        {
+            fourWhichKind = tempFourStrength;
+            fourLastCardStrength = CheckFourLastCard(fourWhichKind);
             return true;
         }
         return false;
     }
 
-    private byte CheckFourLastCard(byte? fourKind){
+    private byte CheckFourLastCard(byte? fourKind)
+    {
         byte strength = 0;
         var lastCard = (from card in allCards
-                                where (card.Number != fourKind)
-                                orderby (card.Number) descending
-                                select card).Take(1);
+                        where (card.Number != fourKind)
+                        orderby (card.Number) descending
+                        select card).Take(1);
         foreach (var card in lastCard)
         {
             strength += card.Number;
@@ -193,7 +220,7 @@ public class Cardest
     //3 level of strength: 1)level FourOfKind 2)level WhichKind 3)level LastCard
     private byte CheckFourKind()
     {
-        byte strFour=0;
+        byte strFour = 0;
 
         for (byte i = 2; i < numberOfCards.Count; i++)//if confused, go to see numberofcards initialization
         {
@@ -208,10 +235,12 @@ public class Cardest
     //zostanie najsilniejsza trojka
     //4 level of strength 1)level ThreeOfKind 2) Level WhichKind 3)Level 1st HighestCard 4)Level 2nd HighestCard
     //BE careful ACES
-    private bool CheckIfThree(){//1level
-        byte kindOfThree=CheckThreeKind();
-        if(kindOfThree>0){
-            threeWhichKind=kindOfThree;
+    private bool CheckIfThree()
+    {//1level
+        byte kindOfThree = CheckThreeKind();
+        if (kindOfThree > 0)
+        {
+            threeWhichKind = kindOfThree;
             CheckThreeLastCards(threeWhichKind);
             return true;
         }
@@ -219,16 +248,17 @@ public class Cardest
     }
 
     //Level 3,4
-    private void CheckThreeLastCards(byte? cardKind){
+    private void CheckThreeLastCards(byte? cardKind)
+    {
         threeLevel3 = 0;
         threeLevel4 = 0;
         var lastCard = (from card in allCards
-                                where (card.Number != cardKind)
-                                orderby (card.Number) descending
-                                select card).Take(2);
-        var tempArray= lastCard.ToArray<Card>();
-        threeLevel3=tempArray[0].Number;
-        threeLevel4=tempArray[1].Number;
+                        where (card.Number != cardKind)
+                        orderby (card.Number) descending
+                        select card).Take(2);
+        var tempArray = lastCard.ToArray<Card>();
+        threeLevel3 = tempArray[0].Number;
+        threeLevel4 = tempArray[1].Number;
     }
 
     //2level
@@ -239,9 +269,9 @@ public class Cardest
         {
             if (numberOfCards[i] == 3)
             {
-                threeWhichKind = i ;
+                threeWhichKind = i;
             }
-        }  
+        }
         return thereIsThree;
     }
 
@@ -250,62 +280,125 @@ public class Cardest
     //i funkcje porownan
 
     //zapamietaj 3 najmocniejsze 2ki, w puli 7 kart moze byc max 3 2ki
-    private bool CheckIfPair()
+
+
+    private void CheckTwoPairStrength()
     {
         throw new NotImplementedException();
+    }
+    //1)level: 2pairs 2)level: higherPairStr 3)level: lowerPairStr 4)Level: 1st strongest card
+    //1)level: pair 2)level: 9 3)level: 1st strongest card 4)level 2nd strongest card 5)level: 3rd strongest card
+    private void CheckOnePairStrength()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void CheckOnePairLevel3_5(byte? cardKind)
+    {
+        onePairLevel3 = 0;
+        onePairLevel4 = 0;
+        onePairLevel5 = 0;
+        var lastCard = (from card in allCards
+                        where (card.Number != cardKind)
+                        orderby (card.Number) descending
+                        select card).Take(3);
+        var tempArray = lastCard.ToArray<Card>();
+        onePairLevel3 = tempArray[0].Number;
+        onePairLevel4 = tempArray[1].Number;
+        onePairLevel5 = tempArray[2].Number;
+    }
+
+    private void CheckTwoPairLevel4(byte? cardKindA, byte? cardKindB)
+    {
+        twoPairLevel4 = 0;
+        var lastCard = (from card in allCards
+                        where (card.Number != cardKindA && card.Number != cardKindB)
+                        orderby (card.Number) descending
+                        select card).Take(1);
+        var tempArray = lastCard.ToArray<Card>();
+        twoPairLevel4 = tempArray[0].Number;
+    }
+
+    // Level 1
+    private bool CheckIfPair()
+    {
+        switch (CheckPairNumber())
+        {
+            case 0:
+                return false;
+            case 1:
+                //only one pair Level2
+                onePairLevel2 = firstPairNumber;
+                //Level 3_5
+                CheckOnePairLevel3_5(onePairLevel1);
+                return true;
+            case 2:
+                //taken as 1 pair to complete full house, we dont need more levels, but im not sure
+                onePairLevel2 = secondPairNumber;
+                //taken as 2 pairs
+                twoPairLevel2 = secondPairNumber;
+                twoPairLevel3 = firstPairNumber;
+                CheckTwoPairLevel4(twoPairLevel2, twoPairLevel3);
+                return true;
+            case 3:
+                //taken as 1 pair to complete full house, we dont need more levels, but im not sure
+                onePairLevel2 = secondPairNumber;
+                //taken as 2 stronger pairs
+                twoPairLevel2 = thirdPairNumber;
+                twoPairLevel3 = secondPairNumber;
+                CheckTwoPairLevel4(twoPairLevel2, twoPairLevel3);
+                return true;
+            default:
+                throw new ArgumentException("Invalid pair number");
+        }
+    }
+    private byte CheckPairNumber()
+    {
         byte numberOfPairs = 0;
-        for (int i = 1; i < numberOfCards.Count; i++)
+        for (int i = 2; i < numberOfCards.Count; i++)
         {
             if (numberOfCards[i] == 2)
             {
                 switch (numberOfPairs)
                 {
                     case 0:
-                        firstPairNumber = (byte?)(i + 1);
+                        firstPairNumber = (byte?)(i);
                         numberOfPairs++;
                         break;
                     case 1:
-                        secondPairNumber = (byte?)(i + 1);
+                        secondPairNumber = (byte?)(i);
                         numberOfPairs++;
                         break;
                     case 2:
-                        thirdPairNumber = (byte?)(i + 1);
+                        thirdPairNumber = (byte?)(i);
                         numberOfPairs++;
                         break;
                 }
             }
         }
-        // ace case
-        if (numberOfCards[0] == 2)
-        {
-            switch (numberOfPairs)
-            {
-                case 0:
-                    firstPairNumber = (byte?)(1);
-                    numberOfPairs++;
-                    break;
-                case 1:
-                    secondPairNumber = (byte?)(1);
-                    numberOfPairs++;
-                    break;
-                case 2:
-                    thirdPairNumber = (byte?)(1);
-                    numberOfPairs++;
-                    break;
-            }
-        }
-        if (numberOfPairs > 0)
-        {
-            return true;
-        }
-        return false;
+        return numberOfPairs;
     }
 
-
-    private bool CheckHighestCard()
+    //Level 1_6 1 if highest card, 2-6
+    private void AllLeftIsHighestCard()
     {
-        throw new NotImplementedException();
+        HighestCardLevel2 = 1;
 
+        HighestCardLevel2 = 0;
+        HighestCardLevel3 = 0;
+        HighestCardLevel4 = 0;
+        HighestCardLevel5 = 0;
+        HighestCardLevel6 = 0;
+        var lastCard = (from card in allCards
+                        where (card.Number != 0)//This is not needed. Probably.
+                        orderby (card.Number) descending
+                        select card).Take(5);
+        var tempArray = lastCard.ToArray<Card>();
+        HighestCardLevel2 = tempArray[0].Number;
+        HighestCardLevel3 = tempArray[0].Number;
+        HighestCardLevel4 = tempArray[0].Number;
+        HighestCardLevel5 = tempArray[0].Number;
+        HighestCardLevel6 = tempArray[0].Number;
     }
 
 
