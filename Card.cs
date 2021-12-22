@@ -12,7 +12,7 @@ namespace TexasHoldEm
 
     public class Card
     {
-        public int Number { get; }
+        public byte Number { get; }
         public string Graphics { get; }
         public CardSymbol Symbol { get; }
         public string GraphicsSymbol { get;}
@@ -22,7 +22,7 @@ namespace TexasHoldEm
             Console.WriteLine($"Card: {Number} = {Graphics} {GraphicsSymbol}");
         }
 
-        public Card(CardSymbol symbol, int number)
+        public Card(CardSymbol symbol, byte number)
         {
             if (number > 14 || number <2)
             {
