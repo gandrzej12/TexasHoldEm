@@ -18,14 +18,16 @@ public class Cardest
 
     byte strengthOfStreigh = 0;
 
-    byte? FourWhichKind = null;
-    byte? FourLastCardStrength = null;
+    byte? fourWhichKind = null;
+    byte? fourLastCardStrength = null;
 
-    byte? WhichNumberOfThree = null;
+    byte? threeWhichKind = null;
+    byte threeLevel3 = 0;
+    byte threeLevel4 = 0;
 
-    private byte? FirstPairNumber = null;
-    private byte? SecondPairNumber = null;
-    private byte? ThirdPairNumber = null;
+    private byte? firstPairNumber = null;
+    private byte? secondPairNumber = null;
+    private byte? thirdPairNumber = null;
 
     private void InitializeNumbers()
     {
@@ -55,7 +57,6 @@ public class Cardest
     //good test case: 7karo in different positions
     private byte GetStrengthOfColor(CardSymbol? symbol)
     {
-        throw new NotImplementedException();
         if (symbol == null) { throw new ArgumentNullException("symbol"); }
         byte strength = 0;
         var fiveHighestCards = (from card in allCards
@@ -167,15 +168,15 @@ public class Cardest
 
 
     private bool CheckIfFour(){
-        byte tempFourStrength= CheckFourStrength();
+        byte tempFourStrength= CheckFourKind();
         if(tempFourStrength>0){
-            FourWhichKind=tempFourStrength;
-            FourLastCardStrength=CheckFourLastCard(FourWhichKind);
+            fourWhichKind=tempFourStrength;
+            fourLastCardStrength=CheckFourLastCard(fourWhichKind);
             return true;
         }
         return false;
     }
-    
+
     private byte CheckFourLastCard(byte? fourKind){
         byte strength = 0;
         var lastCard = (from card in allCards
@@ -190,40 +191,63 @@ public class Cardest
     }
     //Kareta po polsku: cztery takie same figury
     //3 level of strength: 1)level FourOfKind 2)level WhichKind 3)level LastCard
-    private byte CheckFourStrength()
+    private byte CheckFourKind()
     {
-        byte strengthOfFour=0;
+        byte strFour=0;
 
         for (byte i = 2; i < numberOfCards.Count; i++)//if confused, go to see numberofcards initialization
         {
             if (numberOfCards[i] == 4)
             {
-                strengthOfFour = i;
+                strFour = i;
             }
         }
-        return strengthOfFour;
+        return strFour;
     }
 
     //zostanie najsilniejsza trojka
-    private bool CheckIfThree()
+    //4 level of strength 1)level ThreeOfKind 2) Level WhichKind 3)Level 1st HighestCard 4)Level 2nd HighestCard
+    //BE careful ACES
+    private bool CheckIfThree(){//1level
+        byte kindOfThree=CheckThreeKind();
+        if(kindOfThree>0){
+            threeWhichKind=kindOfThree;
+            CheckThreeLastCards(threeWhichKind);
+            return true;
+        }
+        return false;
+    }
+
+    //Level 3,4
+    private void CheckThreeLastCards(byte? cardKind){
+        threeLevel3 = 0;
+        threeLevel4 = 0;
+        var lastCard = (from card in allCards
+                                where (card.Number != cardKind)
+                                orderby (card.Number) descending
+                                select card).Take(2);
+        var tempArray= lastCard.ToArray<Card>();
+        threeLevel3=tempArray[0].Number;
+        threeLevel4=tempArray[1].Number;
+    }
+
+    //2level
+    private byte CheckThreeKind()
     {
-        throw new NotImplementedException();
-        bool thereIsThree = false;
-        for (int i = 1; i < numberOfCards.Count; i++)
+        byte thereIsThree = 0;
+        for (byte i = 2; i < numberOfCards.Count; i++)
         {
             if (numberOfCards[i] == 3)
             {
-                WhichNumberOfThree = i + 1;
-                thereIsThree = true;
+                threeWhichKind = i ;
             }
-        }
-        if (numberOfCards[0] == 3)
-        {//Aces
-            WhichNumberOfThree = 1;
-            thereIsThree = true;
-        }
+        }  
         return thereIsThree;
     }
+
+
+    //analiza w dol potrzebna i potem dopisujemy pokery i wymagane property
+    //i funkcje porownan
 
     //zapamietaj 3 najmocniejsze 2ki, w puli 7 kart moze byc max 3 2ki
     private bool CheckIfPair()
@@ -237,15 +261,15 @@ public class Cardest
                 switch (numberOfPairs)
                 {
                     case 0:
-                        FirstPairNumber = (byte?)(i + 1);
+                        firstPairNumber = (byte?)(i + 1);
                         numberOfPairs++;
                         break;
                     case 1:
-                        SecondPairNumber = (byte?)(i + 1);
+                        secondPairNumber = (byte?)(i + 1);
                         numberOfPairs++;
                         break;
                     case 2:
-                        ThirdPairNumber = (byte?)(i + 1);
+                        thirdPairNumber = (byte?)(i + 1);
                         numberOfPairs++;
                         break;
                 }
@@ -257,15 +281,15 @@ public class Cardest
             switch (numberOfPairs)
             {
                 case 0:
-                    FirstPairNumber = (byte?)(1);
+                    firstPairNumber = (byte?)(1);
                     numberOfPairs++;
                     break;
                 case 1:
-                    SecondPairNumber = (byte?)(1);
+                    secondPairNumber = (byte?)(1);
                     numberOfPairs++;
                     break;
                 case 2:
-                    ThirdPairNumber = (byte?)(1);
+                    thirdPairNumber = (byte?)(1);
                     numberOfPairs++;
                     break;
             }
