@@ -13,12 +13,13 @@ public class Cardest
 
     private byte cardSetLevel = 0;
 
-    private CardSymbol? symbolIfColor= null;
+    private CardSymbol? symbolIfColor = null;
     private byte strengthOfColor;
 
-    byte StrenghtOfStreigh = 0;
+    byte strengthOfStreigh = 0;
 
-    byte? WhichNumberOfFour = null;
+    byte? FourWhichKind = null;
+    byte? FourLastCardStrength = null;
 
     byte? WhichNumberOfThree = null;
 
@@ -52,25 +53,27 @@ public class Cardest
     //------------------------------------------------ABOVE IS DONE
     //test this
     //good test case: 7karo in different positions
-    private byte GetStrengthOfColor(CardSymbol? symbol){
+    private byte GetStrengthOfColor(CardSymbol? symbol)
+    {
         throw new NotImplementedException();
-        if(symbol == null){throw new ArgumentNullException("symbol");}
-        byte strength= 0;
-        var fiveHighestCards= (from card in allCards
-                            where(card.Symbol == symbol)
-                            orderby(card.Number) descending
-                            select card).Take(5);
-        foreach(var card in fiveHighestCards){
-            strength+=card.Number;
+        if (symbol == null) { throw new ArgumentNullException("symbol"); }
+        byte strength = 0;
+        var fiveHighestCards = (from card in allCards
+                                where (card.Symbol == symbol)
+                                orderby (card.Number) descending
+                                select card).Take(5);
+        foreach (var card in fiveHighestCards)
+        {
+            strength += card.Number;
         }
-        return strength;      
+        return strength;
     }
 
     //Kolor po polsku: ten sam znaczek
     //Powinno działać dobrze
     private bool CheckIfColor()
     {
-        bool colorDetected= false;
+        bool colorDetected = false;
         byte needClubs = 0;
         byte needDiamonds = 0;
         byte needHearts = 0;
@@ -95,36 +98,46 @@ public class Cardest
         }
         if (needClubs >= 5)
         {
-            symbolIfColor = CardSymbol.CLUB;         
-            colorDetected=true;
+            symbolIfColor = CardSymbol.CLUB;
+            colorDetected = true;
         }
         if (needDiamonds >= 5)
         {
             symbolIfColor = CardSymbol.DIAMOND;
-            colorDetected= true;
+            colorDetected = true;
         }
         if (needHearts >= 5)
         {
             symbolIfColor = CardSymbol.HEART;
-            colorDetected= true;
+            colorDetected = true;
         }
         if (needSpades >= 5)
         {
             symbolIfColor = CardSymbol.SPADE;
-            colorDetected= true;
+            colorDetected = true;
         }
-        if(colorDetected){
-            strengthOfColor=GetStrengthOfColor(symbolIfColor);
+        if (colorDetected)
+        {
+            strengthOfColor = GetStrengthOfColor(symbolIfColor);
+            return true;
+        }
+        return false;
+    }
+
+    //Strit po polsku: po kolei
+    private bool CheckIfStreigh()
+    {
+        if (CheckStreighStrength() > 0)
+        {
             return true;
         }
         return false;
     }
 
 
-    //Strit po polsku: po kolei
-    private bool CheckIfStreigh()
+    private byte CheckStreighStrength()
     {
-        StrenghtOfStreigh = 0;
+        byte tempStrength = 0;
         //ACE case
         if (
             numberOfCards[14] >= 1 &&
@@ -134,7 +147,7 @@ public class Cardest
             numberOfCards[5] >= 1
             )
         {
-            StrenghtOfStreigh = 1;
+            tempStrength = 1;
         }
         for (byte i = 2; 4 + i < 15; i++)
         {
@@ -146,31 +159,49 @@ public class Cardest
             numberOfCards[4 + i] >= 1
             )
             {
-                StrenghtOfStreigh = i;
+                tempStrength = i;
             }
         }
-        if(StrenghtOfStreigh>0 ){
+        return tempStrength;
+    }
+
+
+    private bool CheckIfFour(){
+        byte tempFourStrength= CheckFourStrength();
+        if(tempFourStrength>0){
+            FourWhichKind=tempFourStrength;
+            FourLastCardStrength=CheckFourLastCard(FourWhichKind);
             return true;
         }
         return false;
     }
-
-
+    
+    private byte CheckFourLastCard(byte? fourKind){
+        byte strength = 0;
+        var lastCard = (from card in allCards
+                                where (card.Number != fourKind)
+                                orderby (card.Number) descending
+                                select card).Take(1);
+        foreach (var card in lastCard)
+        {
+            strength += card.Number;
+        }
+        return strength;
+    }
     //Kareta po polsku: cztery takie same figury
-    //ok bo moze istniec tylko jedna czworka
-    private bool CheckIfFour()
+    //3 level of strength: 1)level FourOfKind 2)level WhichKind 3)level LastCard
+    private byte CheckFourStrength()
     {
-        throw new NotImplementedException();
-        for (int i = 0; i < numberOfCards.Count; i++)
+        byte strengthOfFour=0;
+
+        for (byte i = 2; i < numberOfCards.Count; i++)//if confused, go to see numberofcards initialization
         {
             if (numberOfCards[i] == 4)
             {
-                WhichNumberOfFour = i + 1;
-                return true;
+                strengthOfFour = i;
             }
         }
-        WhichNumberOfFour = 99;
-        return false;
+        return strengthOfFour;
     }
 
     //zostanie najsilniejsza trojka
@@ -239,14 +270,16 @@ public class Cardest
                     break;
             }
         }
-        if(numberOfPairs>0){
+        if (numberOfPairs > 0)
+        {
             return true;
         }
         return false;
     }
 
 
-    private bool CheckHighestCard(){
+    private bool CheckHighestCard()
+    {
         throw new NotImplementedException();
 
     }
