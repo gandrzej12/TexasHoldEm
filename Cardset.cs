@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TexasHoldEm;
 
 public class Cardest
@@ -7,27 +8,27 @@ public class Cardest
     //z setu allCards tworzymy zbiory dla specifiedCards
     private List<Card> allCards = new List<Card>();
     private List<Card> choosenCards = new List<Card>();
-    //private int level = 0;
+
+    private List<byte?> numberOfCards = new List<byte?>();
+
+    private byte cardSetLevel = 0;
 
     private CardSymbol symbolIfColor;
 
-    int StrenghtOfStreigh = 0;
+    byte StrenghtOfStreigh = 0;
 
-    int WhichNumberOfFour = 99;//zmienic na byte? ustawiac null zamiast 99
+    byte? WhichNumberOfFour = null;
 
-    int WhichNumberOfThree = 99;//zmienic na byte? ustawiac null zamiast 99
+    byte? WhichNumberOfThree = null;
 
     private byte? FirstPairNumber = null;
     private byte? SecondPairNumber = null;
     private byte? ThirdPairNumber = null;
 
-
-    private List<int> numberOfCards = new List<int>();
-
     private void InitializeNumbers()
     {
         numberOfCards.Clear();
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 15; i++)
         {
             numberOfCards.Add(0);
         }
@@ -35,11 +36,11 @@ public class Cardest
 
     private void CheckCardNumber()
     {
-        for (int i = 0; i < numberOfCards.Count; i++)
+        for (int i = 2; i < 15; i++)
         {
             foreach (var card in allCards)
             {
-                if (card.Number == i + 1)
+                if (card.Number == i)
                 {
                     numberOfCards[i] += 1;
                 }
@@ -47,10 +48,21 @@ public class Cardest
         }
     }
 
-    private void SaveTheStrongestCardsFromColor(CardSymbol symbol){
+    //------------------------------------------------ABOVE IS DONE
+    //test this
+    private byte GetStrengthOfColor(CardSymbol symbol){
         throw new NotImplementedException();
-        //LINQ? 
+        byte strengthOfColor= 0;
+        var fiveHighestCards= (from card in allCards
+                            where(card.Symbol == symbol)
+                            orderby(card.Number) descending
+                            select card).Take(5);
+        foreach(var card in fiveHighestCards){
+            strengthOfColor+=card.Number;
+        }
+        return strengthOfColor;      
     }
+    
     //Kolor po polsku: ten sam znaczek
     //Powinno działać dobrze
     private bool CheckIfColor()
@@ -80,7 +92,6 @@ public class Cardest
         if (needClubs >= 5)
         {
             symbolIfColor = CardSymbol.CLUB;
-
             return true;
         }
         if (needDiamonds >= 5)
