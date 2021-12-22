@@ -13,7 +13,8 @@ public class Cardest
 
     private byte cardSetLevel = 0;
 
-    private CardSymbol symbolIfColor;
+    private CardSymbol? symbolIfColor= null;
+    private byte strengthOfColor;
 
     byte StrenghtOfStreigh = 0;
 
@@ -50,23 +51,26 @@ public class Cardest
 
     //------------------------------------------------ABOVE IS DONE
     //test this
-    private byte GetStrengthOfColor(CardSymbol symbol){
+    //good test case: 7karo in different positions
+    private byte GetStrengthOfColor(CardSymbol? symbol){
         throw new NotImplementedException();
-        byte strengthOfColor= 0;
+        if(symbol == null){throw new ArgumentNullException("symbol");}
+        byte strength= 0;
         var fiveHighestCards= (from card in allCards
                             where(card.Symbol == symbol)
                             orderby(card.Number) descending
                             select card).Take(5);
         foreach(var card in fiveHighestCards){
-            strengthOfColor+=card.Number;
+            strength+=card.Number;
         }
-        return strengthOfColor;      
+        return strength;      
     }
-    
+
     //Kolor po polsku: ten sam znaczek
     //Powinno działać dobrze
     private bool CheckIfColor()
     {
+        bool colorDetected= false;
         byte needClubs = 0;
         byte needDiamonds = 0;
         byte needHearts = 0;
@@ -91,22 +95,26 @@ public class Cardest
         }
         if (needClubs >= 5)
         {
-            symbolIfColor = CardSymbol.CLUB;
-            return true;
+            symbolIfColor = CardSymbol.CLUB;         
+            colorDetected=true;
         }
         if (needDiamonds >= 5)
         {
             symbolIfColor = CardSymbol.DIAMOND;
-            return true;
+            colorDetected= true;
         }
         if (needHearts >= 5)
         {
             symbolIfColor = CardSymbol.HEART;
-            return true;
+            colorDetected= true;
         }
         if (needSpades >= 5)
         {
             symbolIfColor = CardSymbol.SPADE;
+            colorDetected= true;
+        }
+        if(colorDetected){
+            strengthOfColor=GetStrengthOfColor(symbolIfColor);
             return true;
         }
         return false;
@@ -114,12 +122,21 @@ public class Cardest
 
 
     //Strit po polsku: po kolei
-    //Powinno działać dobrze
-    //sprawdz scenariusz z asem najmniejszy i najwiekszy
     private bool CheckIfStreigh()
     {
         StrenghtOfStreigh = 0;
-        for (int i = 0; 4 + i < 13; i++)
+        //ACE case
+        if (
+            numberOfCards[14] >= 1 &&
+            numberOfCards[2] >= 1 &&
+            numberOfCards[3] >= 1 &&
+            numberOfCards[4] >= 1 &&
+            numberOfCards[5] >= 1
+            )
+        {
+            StrenghtOfStreigh = 1;
+        }
+        for (byte i = 2; 4 + i < 15; i++)
         {
             if (
             numberOfCards[0 + i] >= 1 &&
@@ -130,18 +147,9 @@ public class Cardest
             )
             {
                 StrenghtOfStreigh = i;
-                return true;
             }
         }
-        if (
-            numberOfCards[9] >= 1 &&
-            numberOfCards[10] >= 1 &&
-            numberOfCards[11] >= 1 &&
-            numberOfCards[12] >= 1 &&
-            numberOfCards[0] >= 1
-            )
-        {
-            StrenghtOfStreigh = 10;
+        if(StrenghtOfStreigh>0 ){
             return true;
         }
         return false;
