@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TexasHoldEm;
 
 public abstract class SetAnalyzer
@@ -26,5 +25,5 @@ public abstract class SetAnalyzer
 
     public abstract bool CheckIfFits();
     public abstract void calculateCardSetLevel();
-    
+
 }
