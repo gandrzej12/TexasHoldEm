@@ -21,9 +21,6 @@ public class Cardset
 
     byte strengthOfStreigh = 0;
 
-    byte? fourWhichKind = null;
-    byte? fourLastCardStrength = null;
-
     byte? threeWhichKind = null;
     byte threeLevel3 = 0;
     byte threeLevel4 = 0;
@@ -179,46 +176,7 @@ public class Cardset
     }
 
 
-    private bool CheckIfFour()
-    {
-        byte tempFourStrength = CheckFourKind();
-        if (tempFourStrength > 0)
-        {
-            fourWhichKind = tempFourStrength;
-            fourLastCardStrength = CheckFourLastCard(fourWhichKind);
-            return true;
-        }
-        return false;
-    }
 
-    private byte CheckFourLastCard(byte? fourKind)
-    {
-        byte strength = 0;
-        var lastCard = (from card in allCards
-                        where (card.Number != fourKind)
-                        orderby (card.Number) descending
-                        select card).Take(1);
-        foreach (var card in lastCard)
-        {
-            strength += card.Number;
-        }
-        return strength;
-    }
-    //Kareta po polsku: cztery takie same figury
-    //3 level of strength: 1)level FourOfKind 2)level WhichKind 3)level LastCard
-    private byte CheckFourKind()
-    {
-        byte strFour = 0;
-
-        for (byte i = 2; i < numberOfCards.Count; i++)//if confused, go to see numberofcards initialization
-        {
-            if (numberOfCards[i] == 4)
-            {
-                strFour = i;
-            }
-        }
-        return strFour;
-    }
 
     //zostanie najsilniejsza trojka
     //4 level of strength 1)level ThreeOfKind 2) Level WhichKind 3)Level 1st HighestCard 4)Level 2nd HighestCard

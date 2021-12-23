@@ -12,7 +12,7 @@ public class HighestCard : SetAnalyzer
 
     public override void calculateCardSetLevel()
     {
-        cardSetLevels[0]=1;
+        cardSetLevels[0]= (byte)KindOfSet.HighestCard;
         var lastCard = (from card in allCards
                         where (card.Number != 0)//This is not needed. Probably.
                         orderby (card.Number) descending
@@ -23,15 +23,6 @@ public class HighestCard : SetAnalyzer
         cardSetLevels[3] = tempArray[2].Number;
         cardSetLevels[4] = tempArray[3].Number;
         cardSetLevels[5] = tempArray[4].Number;
-    }
-
-    public override bool CheckIfFits()
-    {
-        if(cardSetLevels[0]>0){
-            return true;
-        }
-        return false;
-        
     }
 
     public override bool Equals(object obj)

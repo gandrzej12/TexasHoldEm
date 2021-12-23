@@ -2,6 +2,17 @@ using System;
 using System.Collections.Generic;
 using TexasHoldEm;
 
+public enum KindOfSet:Byte{
+    HighestCard=1,
+    OnePair=2,
+    TwoPairs = 3,
+    ThreeOfKind = 4,
+    Streigh = 5,
+    Flush = 6,
+    FullHouse = 7,
+    FourOfKind = 8,
+    StreighFlush = 9
+}
 
 public abstract class SetAnalyzer
 {
@@ -45,7 +56,12 @@ public abstract class SetAnalyzer
 
     public byte GetLevel(byte level) => cardSetLevels[level];
 
-    public abstract bool CheckIfFits();
+    public bool CheckIfFits(){
+        if(cardSetLevels[0]>0){
+            return true;
+        }
+        return false;
+    }
     public abstract void calculateCardSetLevel();
 
 }
