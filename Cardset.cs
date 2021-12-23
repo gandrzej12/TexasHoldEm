@@ -10,21 +10,10 @@ public class Cardset
     private List<Card> allCards = new List<Card>();
 
     //section Pairs
-    private byte? firstPairNumber = null;
-    private byte? secondPairNumber = null;
-    private byte? thirdPairNumber = null;
-
-    private byte? onePairLevel1 = 0;//if there is a pair
-    private byte? onePairLevel2 = 0;//the strongest pair str
-    private byte? onePairLevel3 = 0;//1st strongest card
-    private byte? onePairLevel4 = 0;//2nd strongest card
-    private byte? onePairLevel5 = 0;//3rd strongest card
-
     private byte? twoPairLevel1 = 0;//if there is 2 pairs
     private byte? twoPairLevel2 = 0;//stronger pair
     private byte? twoPairLevel3 = 0;//lower pair
     private byte? twoPairLevel4 = 0;//strongest card
-
     //end of pairs
 
 
@@ -34,23 +23,7 @@ public class Cardset
         CheckCardNumber();
     }
 
-    
     //zapamietaj 3 najmocniejsze 2ki, w puli 7 kart moze byc max 3 2ki
-    private void CheckOnePairLevel3_5(byte? cardKind)
-    {
-        onePairLevel3 = 0;
-        onePairLevel4 = 0;
-        onePairLevel5 = 0;
-        var lastCard = (from card in allCards
-                        where (card.Number != cardKind)
-                        orderby (card.Number) descending
-                        select card).Take(3);
-        var tempArray = lastCard.ToArray<Card>();
-        onePairLevel3 = tempArray[0].Number;
-        onePairLevel4 = tempArray[1].Number;
-        onePairLevel5 = tempArray[2].Number;
-    }
-
     private void CheckTwoPairLevel4(byte? cardKindA, byte? cardKindB)
     {
         twoPairLevel4 = 0;
@@ -62,65 +35,6 @@ public class Cardset
         twoPairLevel4 = tempArray[0].Number;
     }
 
-    // Level 1
-    private bool CheckIfPair()
-    {
-        switch (CheckPairNumber())
-        {
-            case 0:
-                return false;
-            case 1:
-                //only one pair Level2
-                onePairLevel2 = firstPairNumber;
-                //Level 3_5
-                CheckOnePairLevel3_5(onePairLevel1);
-                return true;
-            case 2:
-                //taken as 1 pair to complete full house, we dont need more levels, but im not sure
-                onePairLevel2 = secondPairNumber;
-                //taken as 2 pairs
-                twoPairLevel2 = secondPairNumber;
-                twoPairLevel3 = firstPairNumber;
-                CheckTwoPairLevel4(twoPairLevel2, twoPairLevel3);
-                return true;
-            case 3:
-                //taken as 1 pair to complete full house, we dont need more levels, but im not sure
-                onePairLevel2 = secondPairNumber;
-                //taken as 2 stronger pairs
-                twoPairLevel2 = thirdPairNumber;
-                twoPairLevel3 = secondPairNumber;
-                CheckTwoPairLevel4(twoPairLevel2, twoPairLevel3);
-                return true;
-            default:
-                throw new ArgumentException("Invalid pair number");
-        }
-    }
-    private byte CheckPairNumber()
-    {
-        byte numberOfPairs = 0;
-        for (int i = 2; i < numberOfCards.Count; i++)
-        {
-            if (numberOfCards[i] == 2)
-            {
-                switch (numberOfPairs)
-                {
-                    case 0:
-                        firstPairNumber = (byte?)(i);
-                        numberOfPairs++;
-                        break;
-                    case 1:
-                        secondPairNumber = (byte?)(i);
-                        numberOfPairs++;
-                        break;
-                    case 2:
-                        thirdPairNumber = (byte?)(i);
-                        numberOfPairs++;
-                        break;
-                }
-            }
-        }
-        return numberOfPairs;
-    }
 
 }
 
