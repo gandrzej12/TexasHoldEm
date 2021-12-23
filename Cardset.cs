@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TexasHoldEm;
 
-public class Cardest
+//very ugly
+public class Cardset
 {
     //z setu allCards tworzymy zbiory dla specifiedCards
     private List<Card> allCards = new List<Card>();
@@ -56,6 +57,12 @@ public class Cardest
     private byte? HighestCardLevel5 = 0;
     private byte? HighestCardLevel6 = 0;
     //End of High Card section ----------------------------------------------------
+
+    public Cardset(List<Card> someCards){
+        InitializeNumbers();
+        allCards=someCards;
+        CheckCardNumber();
+    }
 
     private void InitializeNumbers()
     {
@@ -393,7 +400,7 @@ public class Cardest
     //Level 1_6 1 if highest card, 2-6
     private void AllLeftIsHighestCard()
     {
-        HighestCardLevel2 = 1;
+        HighestCardLevel1 = 1;
 
         HighestCardLevel2 = 0;
         HighestCardLevel3 = 0;
