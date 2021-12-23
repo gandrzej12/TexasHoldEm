@@ -8,11 +8,8 @@ public class Cardset
 {
     //z setu allCards tworzymy zbiory dla specifiedCards
     private List<Card> allCards = new List<Card>();
-    private List<Card> choosenCards = new List<Card>();
-
     private List<byte?> numberOfCards = new List<byte?>();
 
-    private byte cardSetLevel = 0;
 
     private CardSymbol? symbolIfColor = null;
     //private byte strengthOfColor;
@@ -64,28 +61,9 @@ public class Cardset
         CheckCardNumber();
     }
 
-    private void InitializeNumbers()
-    {
-        numberOfCards.Clear();
-        for (int i = 0; i < 15; i++)
-        {
-            numberOfCards.Add(0);
-        }
-    }
+    
 
-    private void CheckCardNumber()
-    {
-        for (int i = 2; i < 15; i++)
-        {
-            foreach (var card in allCards)
-            {
-                if (card.Number == i)
-                {
-                    numberOfCards[i] += 1;
-                }
-            }
-        }
-    }
+    
 
     //------------------------------------------------ABOVE IS DONE
     //test this
