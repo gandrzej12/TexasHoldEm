@@ -10,15 +10,6 @@ public class Cardset
     private List<Card> allCards = new List<Card>();
     private List<byte?> numberOfCards = new List<byte?>();
 
-
-    private CardSymbol? symbolIfColor = null;
-    //private byte strengthOfColor;
-    private byte? colorLevel2 = 0;
-    private byte? colorLevel3 = 0;
-    private byte? colorLevel4 = 0;
-    private byte? colorLevel5 = 0;
-    private byte? colorLevel6 = 0;
-
     byte strengthOfStreigh = 0;
 
     byte? threeWhichKind = null;
@@ -51,89 +42,6 @@ public class Cardset
     }
 
     
-
-    
-
-    //------------------------------------------------ABOVE IS DONE
-    //test this
-    //good test case: 7karo in different positions
-    //Level1 thereIsColor, Level2_6 siła poszczególnych kart
-
-    private void GetColorLevels2_6(CardSymbol? symbol)
-    {
-        if (symbol == null) { throw new ArgumentNullException("symbol"); }
-        colorLevel2 = 0;
-        colorLevel3 = 0;
-        colorLevel4 = 0;
-        colorLevel5 = 0;
-        colorLevel6 = 0;  
-        var lastCard = (from card in allCards
-                        where (card.Symbol == symbol)
-                        orderby (card.Number) descending
-                        select card).Take(5);
-        var tempArray = lastCard.ToArray<Card>();
-        colorLevel2 = tempArray[0].Number;
-        colorLevel3 = tempArray[1].Number;
-        colorLevel4 = tempArray[2].Number;
-        colorLevel5 = tempArray[3].Number;
-        colorLevel6 = tempArray[4].Number;
-    }
-
-    //Kolor po polsku: ten sam znaczek
-    //Powinno działać dobrze
-    private bool CheckIfColor()
-    {
-        bool colorDetected = false;
-        byte needClubs = 0;
-        byte needDiamonds = 0;
-        byte needHearts = 0;
-        byte needSpades = 0;
-        foreach (var card in allCards)
-        {
-            switch (card.Symbol)
-            {
-                case CardSymbol.CLUB:
-                    needClubs++;
-                    break;
-                case CardSymbol.DIAMOND:
-                    needDiamonds++;
-                    break;
-                case CardSymbol.HEART:
-                    needHearts++;
-                    break;
-                case CardSymbol.SPADE:
-                    needSpades++;
-                    break;
-            }
-        }
-        if (needClubs >= 5)
-        {
-            symbolIfColor = CardSymbol.CLUB;
-            colorDetected = true;
-        }
-        if (needDiamonds >= 5)
-        {
-            symbolIfColor = CardSymbol.DIAMOND;
-            colorDetected = true;
-        }
-        if (needHearts >= 5)
-        {
-            symbolIfColor = CardSymbol.HEART;
-            colorDetected = true;
-        }
-        if (needSpades >= 5)
-        {
-            symbolIfColor = CardSymbol.SPADE;
-            colorDetected = true;
-        }
-        if (colorDetected)
-        {
-            GetColorLevels2_6(symbolIfColor);
-            return true;
-        }
-        return false;
-    }
-
     //Strit po polsku: po kolei
     private bool CheckIfStreigh()
     {

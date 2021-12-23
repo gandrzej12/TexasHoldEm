@@ -18,13 +18,19 @@ public abstract class SetAnalyzer
 {
     protected List<Card> allCards = new List<Card>();
     protected List<Byte> cardSetLevels = new List<Byte>();
-    protected List<Byte> numberOfCards = new List<Byte>();
+
+    protected List<Byte> howManyCardsOfValue = new List<Byte>();
+    protected List<Byte> howManyCardsInSingleColor=new List<Byte>();
 
     public SetAnalyzer(List<Card> someCards)
     {
         allCards = someCards;
         ClearLevels();
-        InitializeNumbers();
+        InitializeValues();
+        InitializeColors();
+
+        CheckCardValues();
+        CheckCardColors();
     }
 
     protected void ClearLevels()
@@ -36,22 +42,38 @@ public abstract class SetAnalyzer
         }
     }
 
-    private void InitializeNumbers()
+    private void InitializeValues()
     {
-        numberOfCards.Clear();
+        howManyCardsOfValue.Clear();
+        // 0,1 shall be empty, just 4 simplicity
         for (int i = 0; i < 15; i++)
         {
-            numberOfCards.Add(0);
+            howManyCardsOfValue.Add(0);
         }
     }
 
-    private void CheckCardNumber()
+    private void InitializeColors(){
+        howManyCardsInSingleColor.Clear();
+        //0,1,2 shall be empty, just 4 simplicity {3,4,5,6}
+        for (int i = 0; i < 7; i++)
+        {
+            howManyCardsInSingleColor.Add(0);
+        }
+    }
+
+    private void CheckCardValues()
     {
         foreach (var card in allCards)
         {
-            numberOfCards[card.Number] += 1;
+            howManyCardsOfValue[card.Number] += 1;
         }
+    }
 
+    private void CheckCardColors(){
+        foreach (var card in allCards)
+        {
+            howManyCardsInSingleColor[(byte)card.Symbol] += 1;
+        }
     }
 
     public byte GetLevel(byte level) => cardSetLevels[level];

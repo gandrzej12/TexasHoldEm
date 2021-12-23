@@ -4,10 +4,10 @@ namespace TexasHoldEm
 {
     public enum CardSymbol
     {
-        CLUB = 0,
-        DIAMOND = 1,
-        HEART = 2,
-        SPADE = 3
+        HEART = 3,//♥alt3
+        DIAMOND = 4,//♦alt4
+        CLUB = 5,//alt5♣  
+        SPADE = 6//♠alt6
     }
 
     public class Card

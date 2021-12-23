@@ -11,9 +11,9 @@ public class FourOfKind : SetAnalyzer
     public override void calculateCardSetLevel()
     {
         // 3level representation   
-        for (byte i = 2; i < numberOfCards.Count; i++)
+        for (byte i = 2; i < howManyCardsOfValue.Count; i++)
         {
-            if (numberOfCards[i] == 4)
+            if (howManyCardsOfValue[i] == 4)
             {
                 cardSetLevels[0] = (byte)KindOfSet.FourOfKind;//FokLevel
                 cardSetLevels[1] = i;
