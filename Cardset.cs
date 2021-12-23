@@ -8,11 +8,6 @@ public class Cardset
 {
     //z setu allCards tworzymy zbiory dla specifiedCards
     private List<Card> allCards = new List<Card>();
-    private List<byte?> numberOfCards = new List<byte?>();
-
-    byte? threeWhichKind = null;
-    byte threeLevel3 = 0;
-    byte threeLevel4 = 0;
 
     //section Pairs
     private byte? firstPairNumber = null;
@@ -40,72 +35,7 @@ public class Cardset
     }
 
     
-    
-
-
-
-
-    //zostanie najsilniejsza trojka
-    //4 level of strength 1)level ThreeOfKind 2) Level WhichKind 3)Level 1st HighestCard 4)Level 2nd HighestCard
-    //BE careful ACES
-    private bool CheckIfThree()
-    {//1level
-        byte kindOfThree = CheckThreeKind();
-        if (kindOfThree > 0)
-        {
-            threeWhichKind = kindOfThree;
-            CheckThreeLastCards(threeWhichKind);
-            return true;
-        }
-        return false;
-    }
-
-    //Level 3,4
-    private void CheckThreeLastCards(byte? cardKind)
-    {
-        threeLevel3 = 0;
-        threeLevel4 = 0;
-        var lastCard = (from card in allCards
-                        where (card.Number != cardKind)
-                        orderby (card.Number) descending
-                        select card).Take(2);
-        var tempArray = lastCard.ToArray<Card>();
-        threeLevel3 = tempArray[0].Number;
-        threeLevel4 = tempArray[1].Number;
-    }
-
-    //2level
-    private byte CheckThreeKind()
-    {
-        byte thereIsThree = 0;
-        for (byte i = 2; i < numberOfCards.Count; i++)
-        {
-            if (numberOfCards[i] == 3)
-            {
-                threeWhichKind = i;
-            }
-        }
-        return thereIsThree;
-    }
-
-
-    //analiza w dol potrzebna i potem dopisujemy pokery i wymagane property
-    //i funkcje porownan
-
     //zapamietaj 3 najmocniejsze 2ki, w puli 7 kart moze byc max 3 2ki
-
-
-    private void CheckTwoPairStrength()
-    {
-        throw new NotImplementedException();
-    }
-    //1)level: 2pairs 2)level: higherPairStr 3)level: lowerPairStr 4)Level: 1st strongest card
-    //1)level: pair 2)level: 9 3)level: 1st strongest card 4)level 2nd strongest card 5)level: 3rd strongest card
-    private void CheckOnePairStrength()
-    {
-        throw new NotImplementedException();
-    }
-
     private void CheckOnePairLevel3_5(byte? cardKind)
     {
         onePairLevel3 = 0;
@@ -191,10 +121,6 @@ public class Cardset
         }
         return numberOfPairs;
     }
-
-    
-
-
 
 }
 
