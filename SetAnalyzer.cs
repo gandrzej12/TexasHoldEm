@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using TexasHoldEm;
 
+
 public abstract class SetAnalyzer
 {
-    private List<Card> allCards = new List<Card>();
-    private List<Byte> cardSetLevels = new List<Byte>();
-    private List<Byte> numberOfCards = new List<Byte>();
+    protected List<Card> allCards = new List<Card>();
+    protected List<Byte> cardSetLevels = new List<Byte>();
+    protected List<Byte> numberOfCards = new List<Byte>();
 
     public SetAnalyzer(List<Card> someCards)
     {

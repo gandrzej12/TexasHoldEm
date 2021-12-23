@@ -46,14 +46,6 @@ public class Cardset
 
     //end of pairs
 
-    //High Card section -----------------------------------------------------------
-    private byte? HighestCardLevel1 = 0;
-    private byte? HighestCardLevel2 = 0;
-    private byte? HighestCardLevel3 = 0;
-    private byte? HighestCardLevel4 = 0;
-    private byte? HighestCardLevel5 = 0;
-    private byte? HighestCardLevel6 = 0;
-    //End of High Card section ----------------------------------------------------
 
     public Cardset(List<Card> someCards){
         InitializeNumbers();
@@ -375,27 +367,7 @@ public class Cardset
         return numberOfPairs;
     }
 
-    //Level 1_6 1 if highest card, 2-6
-    private void AllLeftIsHighestCard()
-    {
-        HighestCardLevel1 = 1;
-
-        HighestCardLevel2 = 0;
-        HighestCardLevel3 = 0;
-        HighestCardLevel4 = 0;
-        HighestCardLevel5 = 0;
-        HighestCardLevel6 = 0;
-        var lastCard = (from card in allCards
-                        where (card.Number != 0)//This is not needed. Probably.
-                        orderby (card.Number) descending
-                        select card).Take(5);
-        var tempArray = lastCard.ToArray<Card>();
-        HighestCardLevel2 = tempArray[0].Number;
-        HighestCardLevel3 = tempArray[0].Number;
-        HighestCardLevel4 = tempArray[0].Number;
-        HighestCardLevel5 = tempArray[0].Number;
-        HighestCardLevel6 = tempArray[0].Number;
-    }
+    
 
 
 
