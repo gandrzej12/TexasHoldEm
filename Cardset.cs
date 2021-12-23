@@ -14,7 +14,12 @@ public class Cardest
     private byte cardSetLevel = 0;
 
     private CardSymbol? symbolIfColor = null;
-    private byte strengthOfColor;
+    //private byte strengthOfColor;
+    private byte? colorLevel2 = 0;
+    private byte? colorLevel3 = 0;
+    private byte? colorLevel4 = 0;
+    private byte? colorLevel5 = 0;
+    private byte? colorLevel6 = 0;
 
     byte strengthOfStreigh = 0;
 
@@ -78,20 +83,26 @@ public class Cardest
     //------------------------------------------------ABOVE IS DONE
     //test this
     //good test case: 7karo in different positions
-    private byte GetStrengthOfColor(CardSymbol? symbol)
+    //Level1 thereIsColor, Level2_6 siła poszczególnych kart
+
+    private void GetColorLevels2_6(CardSymbol? symbol)
     {
-        throw new NotImplementedException();//bo trzeba ziamplementowac levele kazdy na poszczegolna karte aaaaaaaaaaa
         if (symbol == null) { throw new ArgumentNullException("symbol"); }
-        byte strength = 0;
-        var fiveHighestCards = (from card in allCards
-                                where (card.Symbol == symbol)
-                                orderby (card.Number) descending
-                                select card).Take(5);
-        foreach (var card in fiveHighestCards)
-        {
-            strength += card.Number;// we cannot sum here, need to repair it later
-        }
-        return strength;
+        colorLevel2 = 0;
+        colorLevel3 = 0;
+        colorLevel4 = 0;
+        colorLevel5 = 0;
+        colorLevel6 = 0;  
+        var lastCard = (from card in allCards
+                        where (card.Symbol == symbol)
+                        orderby (card.Number) descending
+                        select card).Take(5);
+        var tempArray = lastCard.ToArray<Card>();
+        colorLevel2 = tempArray[0].Number;
+        colorLevel3 = tempArray[1].Number;
+        colorLevel4 = tempArray[2].Number;
+        colorLevel5 = tempArray[3].Number;
+        colorLevel6 = tempArray[4].Number;
     }
 
     //Kolor po polsku: ten sam znaczek
@@ -143,7 +154,7 @@ public class Cardest
         }
         if (colorDetected)
         {
-            strengthOfColor = GetStrengthOfColor(symbolIfColor);
+            GetColorLevels2_6(symbolIfColor);
             return true;
         }
         return false;
