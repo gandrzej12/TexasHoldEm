@@ -10,8 +10,6 @@ public class Cardset
     private List<Card> allCards = new List<Card>();
     private List<byte?> numberOfCards = new List<byte?>();
 
-    byte strengthOfStreigh = 0;
-
     byte? threeWhichKind = null;
     byte threeLevel3 = 0;
     byte threeLevel4 = 0;
@@ -42,46 +40,7 @@ public class Cardset
     }
 
     
-    //Strit po polsku: po kolei
-    private bool CheckIfStreigh()
-    {
-        if (CheckStreighStrength() > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-
-    private byte CheckStreighStrength()
-    {
-        byte tempStrength = 0;
-        //ACE case
-        if (
-            numberOfCards[14] >= 1 &&
-            numberOfCards[2] >= 1 &&
-            numberOfCards[3] >= 1 &&
-            numberOfCards[4] >= 1 &&
-            numberOfCards[5] >= 1
-            )
-        {
-            tempStrength = 1;
-        }
-        for (byte i = 2; 4 + i < 15; i++)
-        {
-            if (
-            numberOfCards[0 + i] >= 1 &&
-            numberOfCards[1 + i] >= 1 &&
-            numberOfCards[2 + i] >= 1 &&
-            numberOfCards[3 + i] >= 1 &&
-            numberOfCards[4 + i] >= 1
-            )
-            {
-                tempStrength = i;
-            }
-        }
-        return tempStrength;
-    }
+    
 
 
 
