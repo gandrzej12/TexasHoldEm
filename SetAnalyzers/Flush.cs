@@ -2,17 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TexasHoldEm;
 
-public class Flush : SetAnalyzer
+public partial class SetAnalyzer
 {
-    
-
-    public Flush(List<Card> someCards) : base(someCards)
-    {
-    }
-
-    
-
-    public override void calculateCardSetLevel()
+    public void calculateFlush()
     {
         ClearLevels();
         for(byte i = 3; i <7;i++){
@@ -31,20 +23,5 @@ public class Flush : SetAnalyzer
                 cardSetLevels[5]=tempArray[4].Number;
             }
         }
-    }
-
-    public override bool Equals(object obj)
-    {
-        return base.Equals(obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return base.ToString();
     }
 }

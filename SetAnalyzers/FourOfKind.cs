@@ -2,13 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TexasHoldEm;
 
-public class FourOfKind : SetAnalyzer
+public partial class SetAnalyzer
 {
-    public FourOfKind(List<Card> someCards) : base(someCards)
-    {
-    }
-
-    public override void calculateCardSetLevel()
+    public void calculateFourOfKind()
     {
         ClearLevels();
         // 3level representation   
@@ -27,21 +23,5 @@ public class FourOfKind : SetAnalyzer
                 cardSetLevels[2] = tempArray[0].Number;
             }
         }
-    }
-
-
-    public override bool Equals(object obj)
-    {
-        return base.Equals(obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return base.ToString();
     }
 }

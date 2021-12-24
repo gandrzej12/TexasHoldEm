@@ -1,14 +1,10 @@
 using System.Collections.Generic;
 using TexasHoldEm;
 
-public class Streigh : SetAnalyzer
+public partial class SetAnalyzer
 {
-    public Streigh(List<Card> someCards) : base(someCards)
-    {
-    }
-
     //Streigh needs 2 levels
-    public override void calculateCardSetLevel()
+    public void calculateStreigh()
     {
         ClearLevels();
         byte tempStrength = 0;
@@ -40,20 +36,5 @@ public class Streigh : SetAnalyzer
             cardSetLevels[0] = (byte)KindOfSet.Streigh;
             cardSetLevels[1] = tempStrength;
         }
-    }
-
-    public override bool Equals(object obj)
-    {
-        return base.Equals(obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return base.ToString();
     }
 }

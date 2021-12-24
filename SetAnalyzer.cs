@@ -14,7 +14,7 @@ public enum KindOfSet:Byte{
     StreighFlush = 9
 }
 
-public abstract class SetAnalyzer
+public partial class SetAnalyzer
 {
     protected List<Card> allCards = new List<Card>();
     protected List<Byte> cardSetLevels = new List<Byte>();
@@ -84,6 +84,5 @@ public abstract class SetAnalyzer
         }
         return false;
     }
-    public abstract void calculateCardSetLevel();
 
 }

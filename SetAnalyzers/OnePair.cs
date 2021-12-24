@@ -2,13 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TexasHoldEm;
 
-public class OnePair : SetAnalyzer
+public partial class SetAnalyzer
 {
-    public OnePair(List<Card> someCards) : base(someCards)
-    {
-    }
-
-    public override void calculateCardSetLevel()
+    public void calculateOnePair()
     {
         ClearLevels();
         byte howManyPairs=0;
@@ -29,23 +25,5 @@ public class OnePair : SetAnalyzer
                 cardSetLevels[4]=tempArray[2].Number;
             }
         }
-    }
-
-
-    
-
-    public override bool Equals(object obj)
-    {
-        return base.Equals(obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return base.ToString();
     }
 }
