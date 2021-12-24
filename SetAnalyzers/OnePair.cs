@@ -4,16 +4,13 @@ using TexasHoldEm;
 
 public class OnePair : SetAnalyzer
 {
-    private byte firstPairNumber = 0;
-    private byte secondPairNumber = 0;
-    private byte thirdPairNumber = 0;
-
     public OnePair(List<Card> someCards) : base(someCards)
     {
     }
 
     public override void calculateCardSetLevel()
     {
+        ClearLevels();
         byte howManyPairs=0;
         for (int i = 2; i < 15; i++)
         {

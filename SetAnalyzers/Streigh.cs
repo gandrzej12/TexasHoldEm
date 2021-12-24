@@ -10,6 +10,7 @@ public class Streigh : SetAnalyzer
     //Streigh needs 2 levels
     public override void calculateCardSetLevel()
     {
+        ClearLevels();
         byte tempStrength = 0;
         //ACE case
         if (

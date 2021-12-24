@@ -11,6 +11,7 @@ public class ThreeOfKind : SetAnalyzer
     //ThreeOfKind needs 4Levels
     public override void calculateCardSetLevel()
     {
+        ClearLevels();
         for (byte i = 2; i < 15; i++)
         {
             if (howManyCardsOfValue[i] == 3)

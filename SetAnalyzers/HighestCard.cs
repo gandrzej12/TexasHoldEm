@@ -12,6 +12,7 @@ public class HighestCard : SetAnalyzer
 
     public override void calculateCardSetLevel()
     {
+        ClearLevels();
         cardSetLevels[0]= (byte)KindOfSet.HighestCard;
         var lastCard = (from card in allCards
                         where (card.Number != 0)//This is not needed. Probably.

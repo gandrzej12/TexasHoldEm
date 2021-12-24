@@ -23,7 +23,6 @@ public class Cardset
         CheckCardNumber();
     }
 
-    //zapamietaj 3 najmocniejsze 2ki, w puli 7 kart moze byc max 3 2ki
     private void CheckTwoPairLevel4(byte? cardKindA, byte? cardKindB)
     {
         twoPairLevel4 = 0;

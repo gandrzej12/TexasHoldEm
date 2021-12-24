@@ -14,6 +14,7 @@ public class Flush : SetAnalyzer
 
     public override void calculateCardSetLevel()
     {
+        ClearLevels();
         for(byte i = 3; i <7;i++){
             if(howManyCardsInSingleColor[i] >= 5){
                 cardSetLevels[0] = (byte)KindOfSet.Flush;

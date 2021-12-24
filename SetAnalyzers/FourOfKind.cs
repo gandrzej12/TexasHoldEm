@@ -10,6 +10,7 @@ public class FourOfKind : SetAnalyzer
 
     public override void calculateCardSetLevel()
     {
+        ClearLevels();
         // 3level representation   
         for (byte i = 2; i < howManyCardsOfValue.Count; i++)
         {
@@ -27,23 +28,6 @@ public class FourOfKind : SetAnalyzer
             }
         }
     }
-
-
-    private byte CheckFourLastCard(byte? fourKind)
-    {
-        byte strength = 0;
-        var lastCard = (from card in allCards
-                        where (card.Number != fourKind)
-                        orderby (card.Number) descending
-                        select card).Take(1);
-        foreach (var card in lastCard)
-        {
-            strength += card.Number;
-        }
-        return strength;
-    }
-
-
 
 
     public override bool Equals(object obj)
