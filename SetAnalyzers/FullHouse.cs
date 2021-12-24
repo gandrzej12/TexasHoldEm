@@ -6,7 +6,6 @@ using System;
 public partial class SetAnalyzer{
     //FullHouse level1, level2 strongest ThreeOfKind value, level3 StrongestPair value
     public void calculateFullHouse(){
-        throw new NotImplementedException();
         ClearLevels();
         calculateThreeOfKind();
         if(CheckIfFits()){
