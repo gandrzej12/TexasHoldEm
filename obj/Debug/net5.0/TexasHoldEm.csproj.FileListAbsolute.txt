@@ -16,3 +16,4 @@ C:\Users\agierlak\Documents\programowanie_test\TexasHoldEm\obj\Debug\net5.0\Texa
 C:\Users\agierlak\Documents\programowanie_test\TexasHoldEm\obj\Debug\net5.0\ref\TexasHoldEm.dll
 C:\Users\agierlak\Documents\programowanie_test\TexasHoldEm\obj\Debug\net5.0\TexasHoldEm.pdb
 C:\Users\agierlak\Documents\programowanie_test\TexasHoldEm\obj\Debug\net5.0\TexasHoldEm.genruntimeconfig.cache
+C:\Users\agierlak\Documents\programowanie_test\TexasHoldEm\obj\Debug\net5.0\TexasHoldEm.csproj.CopyComplete
