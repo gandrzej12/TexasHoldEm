@@ -85,4 +85,8 @@ public partial class SetAnalyzer
         return false;
     }
 
+    public List<Byte> getAllCardSetLevels(){
+        return cardSetLevels;
+    }
+
 }

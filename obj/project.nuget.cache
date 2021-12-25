@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "wMifLzNWVm+KTXv/wMmUPAEJyY6a7JtWJn5eUGC5QKLuBd1XybHqAIELtDKqqRNuy49MbarM3261eOaovoR9tQ==",
+  "dgSpecHash": "4PauFDsnBgmIMZgCHFoa1qXW6oMW3VIGX+ruLuhTKRx9n6Xne0Y68zkQFXwTFiSb7aq1MsT2Zf1I0cD5+V02BA==",
   "success": true,
   "projectFilePath": "c:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\agierlak\\.nuget\\packages\\nstack.core\\0.16.0\\nstack.core.0.16.0.nupkg.sha512",
     "C:\\Users\\agierlak\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
-    "C:\\Users\\agierlak\\.nuget\\packages\\terminal.gui\\1.4.0\\terminal.gui.1.4.0.nupkg.sha512"
+    "C:\\Users\\agierlak\\.nuget\\packages\\terminal.gui\\1.4.0\\terminal.gui.1.4.0.nupkg.sha512",
+    "C:\\Users\\agierlak\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
   ],
   "logs": []
 }
