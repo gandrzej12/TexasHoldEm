@@ -76,8 +76,6 @@ public partial class SetAnalyzer
         }
     }
 
-    public byte GetLevel(byte level) => cardSetLevels[level];
-
     public bool CheckIfFits(){
         if(cardSetLevels[0]>0){
             return true;
@@ -85,7 +83,40 @@ public partial class SetAnalyzer
         return false;
     }
 
-    public List<Byte> getAllCardSetLevels(){
+    public List<Byte> levelAnalyze(){
+        calculateStreighFlush();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateFourOfKind();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateFullHouse();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateFlush();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateStreigh();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateThreeOfKind();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateTwoPairs();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateOnePair();
+        if(CheckIfFits()){
+            return cardSetLevels;
+        }
+        calculateHighestCard();
         return cardSetLevels;
     }
 
