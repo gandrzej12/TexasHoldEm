@@ -1,14 +1,22 @@
 using System;
 using System.Collections.Generic;
 using Terminal.Gui;
+using TexasHoldEm;
 
 public class Game
 {
     Deck myDeck = new Deck();
     protected List<Player> playerList = new List<Player>();
+    protected List<Card> tableCards= new List<Card>();
 
     public void StartGame(){
         AddPlayers();
+        TossCardsToPlayers();
+        FlopStateCards();
+
+        TurnStateCards();//to moze byc juz w gui
+
+        RiverStateCards();//to moze byc juz w gui
 
         ProgramGUI();
     }
@@ -22,9 +30,28 @@ public class Game
         playerList.Add(new Player(120, 17));
     }
 
+    public void TossCardsToPlayers(){
+        for(int i=0;i<6;i++){
+            playerList[i].GivePlayerTwoCards(myDeck.PickACard(),myDeck.PickACard());
+        }
+    }
+
+    public void FlopStateCards(){
+        tableCards.Add(myDeck.PickACard());
+        tableCards.Add(myDeck.PickACard());
+        tableCards.Add(myDeck.PickACard());
+    }
+    public void TurnStateCards(){
+        tableCards.Add(myDeck.PickACard());
+    }
+
+    public void RiverStateCards(){
+        tableCards.Add(myDeck.PickACard());
+    }
+
     static bool Quit()
     {
-        var n = MessageBox.Query(50, 7, "Quit Demo", "Are you sure you want to quit this demo?", "Yes", "No");
+        var n = MessageBox.Query(50, 7, "Quit Simulation", "Are you sure?", "Yes", "No");
         return n == 0;
     }
 
