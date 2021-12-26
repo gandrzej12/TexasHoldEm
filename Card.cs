@@ -18,6 +18,7 @@ namespace TexasHoldEm
         public string Graphics { get; }
         public CardSymbol Symbol { get; }
         public string GraphicsSymbol { get;}
+        public Terminal.Gui.Attribute CardColor{get;set;}
         //TODO szablon karty- np. jak wyswietlac graficznie 7 znaczkow 
 
         public void PrintCard(){
@@ -70,106 +71,92 @@ namespace TexasHoldEm
         }
 
         public List<string> cardToGUI(){
-            var color=new Terminal.Gui.Attribute(Color.BrightGreen, Color.Black);
+            var color=new Terminal.Gui.Attribute(Color.Black, Color.White);
             if(Symbol==CardSymbol.DIAMOND || Symbol==CardSymbol.HEART){
-                color=new Terminal.Gui.Attribute(Color.Red, Color.Black);
+                color=new Terminal.Gui.Attribute(Color.Red, Color.White);
             }
+            CardColor=color;
             List<string> stringList=new List<string>();
-            CardSymbol s=Symbol;
+            string s=GraphicsSymbol;
             string n=Graphics;
-            string vertiz="|";
-            string horiz="=";
             switch(Number){
                 case 2:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($" {s} {n}");
-                    stringList.Add($"   {vertiz}");
-                    stringList.Add($" {s} {vertiz}");
-                    stringList.Add($"   {vertiz}");
+                    stringList.Add($"    ");
+                    stringList.Add($" {s}  ");
+                    stringList.Add($"    ");
                     break;
                 case 3:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($" {s} {n}");
-                    stringList.Add($" {s} {vertiz}");
-                    stringList.Add($" {s} {vertiz}");
-                    stringList.Add($"   {vertiz}");
+                    stringList.Add($" {s}  ");
+                    stringList.Add($" {s}  ");
+                    stringList.Add($"    ");
                     break;
                 case 4:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($"{s} {s}{n}");
-                    stringList.Add($"   {vertiz}");
-                    stringList.Add($"   {vertiz}");
-                    stringList.Add($"{s} {s}{vertiz}");
+                    stringList.Add($"    ");
+                    stringList.Add($"    ");
+                    stringList.Add($"{s} {s} ");
                     break;
                 case 5:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($"{s} {s}{n}");
-                    stringList.Add($" {s} {vertiz}");
-                    stringList.Add($"{s} {s}{vertiz}");
-                    stringList.Add($"   {vertiz}");
+                    stringList.Add($" {s}  ");
+                    stringList.Add($"{s} {s} ");
+                    stringList.Add($"    ");
                     break;
                 case 6:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($"{s} {s}{n}");
-                    stringList.Add($"{s} {s}{vertiz}");
-                    stringList.Add($"{s} {s}{vertiz}");
-                    stringList.Add($"   {vertiz}");
+                    stringList.Add($"{s} {s} ");
+                    stringList.Add($"{s} {s} ");
+                    stringList.Add($"    ");
                     break;
                 case 7:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($"{s} {s}{n}");
-                    stringList.Add($"{s}{s}{s}{vertiz}");
-                    stringList.Add($"{s} {s}{vertiz}");
-                    stringList.Add($"   {vertiz}");
+                    stringList.Add($"{s}{s}{s} ");
+                    stringList.Add($"{s} {s} ");
+                    stringList.Add($"    ");
                     break;
                 case 8:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($"{s} {s}{n}");
-                    stringList.Add($"{s} {s}{vertiz}");
-                    stringList.Add($"{s} {s}{vertiz}");
-                    stringList.Add($"{s} {s}{vertiz}");
+                    stringList.Add($"{s} {s} ");
+                    stringList.Add($"{s} {s} ");
+                    stringList.Add($"{s} {s} ");
                     break;
                 case 9:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
-                    stringList.Add($"{s} {s}{n}");
-                    stringList.Add($"{s}{s}{s}{vertiz}");
-                    stringList.Add($"{s}{s}{s}{vertiz}");
-                    stringList.Add($" {s} {vertiz}");
+                    stringList.Add($"{s}{s}{s}{n}");
+                    stringList.Add($"{s}{s}{s} ");
+                    stringList.Add($"{s}{s}{s} ");
+                    stringList.Add($"    ");
                     break;
                 case 10:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
                     stringList.Add($"{s} {s}{n}");
-                    stringList.Add($"{s}{s}{s}{vertiz}");
-                    stringList.Add($"{s}{s}{s}{vertiz}");
-                    stringList.Add($"{s} {s}{vertiz}");
+                    stringList.Add($"{s}{s}{s} ");
+                    stringList.Add($"{s}{s}{s} ");
+                    stringList.Add($"{s} {s} ");
                     break;
                 case 11:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
-                    stringList.Add($"JJJ{n}");
-                    stringList.Add($"  J{vertiz}");
-                    stringList.Add($"J J{vertiz}");
-                    stringList.Add($"JJJ{vertiz}");
+                    stringList.Add($" J {s}");
+                    stringList.Add($" J  ");
+                    stringList.Add($" J  ");
+                    stringList.Add($"J J ");
                     break;
                 case 12:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
-                    stringList.Add($"DDD{n}");
-                    stringList.Add($"D D{vertiz}");
-                    stringList.Add($"D D{vertiz}");
-                    stringList.Add($"DDD{vertiz}");
+                    stringList.Add($" Q {s}");
+                    stringList.Add($" QQ ");
+                    stringList.Add($" |  ");
+                    stringList.Add($"//  ");
                     break;
                 case 13:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
-                    stringList.Add($"K K{n}");
-                    stringList.Add($"KK {vertiz}");
-                    stringList.Add($"K K{vertiz}");
-                    stringList.Add($"K K{vertiz}");
+                    stringList.Add($" K {s}");
+                    stringList.Add($" I  ");
+                    stringList.Add($" N  ");
+                    stringList.Add($" G  ");
                     break;
                 case 14:
-                    stringList.Add($"{horiz}{horiz}{horiz}{s}");
-                    stringList.Add($"==={n}");
-                    stringList.Add($"={s}={vertiz}");
-                    stringList.Add($"==={vertiz}");
-                    stringList.Add($"==={vertiz}");
+                    stringList.Add($"   {s}");
+                    stringList.Add($" A  ");
+                    stringList.Add($"    ");
+                    stringList.Add($"    ");
                     break;
             }
 

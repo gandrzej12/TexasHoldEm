@@ -15,7 +15,7 @@ namespace TexasHoldEm
             // myDeck.PickACard().PrintCard();
 
             // new SetTester().readCSV();
-            
+            new Game().StartGame();
         }  
     }
 }
