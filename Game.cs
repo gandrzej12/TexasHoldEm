@@ -67,8 +67,9 @@ public class Game
         return n == 0;
     }
 
-    private void showPlayerCards(int playerNumber, List<string> firstOrSecondCard, Window myWin, int offset)
+    private void showPlayerCards(int playerNumber, Card card, Window myWin, int offset)
     {
+        List<string> firstOrSecondCard= card.cardToGUI();
         for (int j = 0; j < firstOrSecondCard.Count; j++)
         {
             var cardRow = new Label(firstOrSecondCard[j])
@@ -77,7 +78,7 @@ public class Game
                 Y = (playerList[playerNumber].PlayerPosition_Y + 1 + j),
                 ColorScheme = new ColorScheme()
                 {
-                    Normal = playerList[playerNumber].GetFirstCard().CardColor
+                    Normal = card.CardColor
                 },
             };
             myWin.Add(cardRow);
@@ -118,10 +119,10 @@ public class Game
             };
             win.Add(playerLabel);
 
-            List<string> firstCard = playerList[i].GetFirstCard().cardToGUI();
+            Card firstCard = playerList[i].GetFirstCard();
             showPlayerCards(i, firstCard, win, 0);
 
-            List<string> secondCard = playerList[i].GetSecondCard().cardToGUI();
+            Card secondCard = playerList[i].GetSecondCard();
             showPlayerCards(i, secondCard, win, 9);
 
             showTableCards(win);
