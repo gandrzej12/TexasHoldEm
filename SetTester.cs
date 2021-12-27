@@ -25,7 +25,7 @@ public class SetTester
         foreach(var line in lines){
             testCards.Clear();
             var values=line.Split(',');
-            for(var i=0; i<5;i++){
+            for(var i=0; i<7;i++){
                 CardSymbol symbix;
                 switch(values[i*2].ToLower()){
                     case "heart":
@@ -47,7 +47,7 @@ public class SetTester
                 testCards.Add(new Card(symbix, number));              
             }
 
-            for(var i=0;i<5;i++){
+            for(var i=0;i<7;i++){
                 levels[i]=Convert.ToByte(values[i+10]);
             }
 
