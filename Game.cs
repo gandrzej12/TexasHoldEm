@@ -62,6 +62,23 @@ public class Game
         return n == 0;
     }
 
+    private void showPlayerCards(int playerNumber, List<string> firstOrSecondCard, Window myWin,int offset)
+    {
+        for (int j = 0; j < firstOrSecondCard.Count; j++)
+        {
+            var cardRow = new Label(firstOrSecondCard[j])
+            {
+                X = playerList[playerNumber].PlayerPosition_X +offset,
+                Y = (playerList[playerNumber].PlayerPosition_Y + 1 + j),
+                ColorScheme = new ColorScheme()
+                {
+                    Normal = playerList[playerNumber].GetFirstCard().CardColor
+                },
+            };
+            myWin.Add(cardRow);
+        }
+    }
+
     public void ProgramGUI()
     {
         Application.Init();
@@ -77,8 +94,8 @@ public class Game
         };
         var menu = new MenuBar(new MenuBarItem[] {
             new MenuBarItem ("_F9", new MenuItem [] {
-                new MenuItem ("_Open", "", null),
-                new MenuItem ("_Quit", "", () => { if (Quit ()) top.Running = false; })
+                //new MenuItem ("_Open", "", null),
+                new MenuItem ("_Quit", "", () => { if (Quit ()) top.Running = false; }),
             })
         });
 
@@ -92,35 +109,11 @@ public class Game
             win.Add(playerLabel);
 
             List<string> firstCard = playerList[i].GetFirstCard().cardToGUI();
-            for (int j = 0; j < firstCard.Count; j++)
-            {
-                var cardRow = new Label(firstCard[j])
-                {
-                    X = playerList[i].PlayerPosition_X,
-                    Y = (playerList[i].PlayerPosition_Y+1+j),
-                    ColorScheme = new ColorScheme()
-                        {
-                            Normal = playerList[i].GetFirstCard().CardColor
-                        },
-                };
-                win.Add(cardRow);
-            }
-
+            showPlayerCards(i,firstCard,win,0);
+            
             List<string> secondCard = playerList[i].GetSecondCard().cardToGUI();
-            for (int j = 0; j < secondCard.Count; j++)
-            {
-                var cardRow = new Label(secondCard[j])
-                {
-                    X = playerList[i].PlayerPosition_X+9,
-                    Y = (playerList[i].PlayerPosition_Y+j+1),
-                    ColorScheme = new ColorScheme()
-                        {
-                            Normal = playerList[i].GetFirstCard().CardColor
-                        },
-                };
-                win.Add(cardRow);
-            }
-
+            showPlayerCards(i,secondCard,win,9);
+            
         }
 
         top.Add(win, menu);
