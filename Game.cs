@@ -62,13 +62,13 @@ public class Game
         return n == 0;
     }
 
-    private void showPlayerCards(int playerNumber, List<string> firstOrSecondCard, Window myWin,int offset)
+    private void showPlayerCards(int playerNumber, List<string> firstOrSecondCard, Window myWin, int offset)
     {
         for (int j = 0; j < firstOrSecondCard.Count; j++)
         {
             var cardRow = new Label(firstOrSecondCard[j])
             {
-                X = playerList[playerNumber].PlayerPosition_X +offset,
+                X = playerList[playerNumber].PlayerPosition_X + offset,
                 Y = (playerList[playerNumber].PlayerPosition_Y + 1 + j),
                 ColorScheme = new ColorScheme()
                 {
@@ -76,6 +76,30 @@ public class Game
                 },
             };
             myWin.Add(cardRow);
+        }
+    }
+
+    private void showTableCards(Window myWin)
+    {
+        int posX=50;
+        int posY=10;
+        int offset=9;
+        for (int i = 0; i < tableCards.Count; i++)
+        {
+            List<string> card = tableCards[i].cardToGUI();
+            for (int j = 0; j < card.Count; j++)
+            {
+                var cardRow = new Label(card[j])
+                {
+                    X = posX+ offset*i,
+                    Y = posY+j,
+                    ColorScheme = new ColorScheme()
+                    {
+                        Normal = tableCards[i].CardColor
+                    },
+                };
+                myWin.Add(cardRow);
+            }
         }
     }
 
@@ -109,11 +133,12 @@ public class Game
             win.Add(playerLabel);
 
             List<string> firstCard = playerList[i].GetFirstCard().cardToGUI();
-            showPlayerCards(i,firstCard,win,0);
-            
+            showPlayerCards(i, firstCard, win, 0);
+
             List<string> secondCard = playerList[i].GetSecondCard().cardToGUI();
-            showPlayerCards(i,secondCard,win,9);
-            
+            showPlayerCards(i, secondCard, win, 9);
+
+            showTableCards(win);
         }
 
         top.Add(win, menu);
