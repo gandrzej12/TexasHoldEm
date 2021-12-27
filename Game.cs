@@ -11,19 +11,24 @@ public class Game
 
     public void StartGame()
     {
-        AddPlayers();
-        TossCardsToPlayers();
-        FlopStateCards();
-
-        TurnStateCards();//to moze byc juz w gui
-
-        RiverStateCards();//to moze byc juz w gui
-
+        GameSetup();
         ProgramGUI();
     }
 
+    private void GameSetup(){
+        myDeck = new Deck();
+        tableCards= new List<Card>();
+        AddPlayers();
+        TossCardsToPlayers();
+        FlopStateCards();
+        TurnStateCards();
+        RiverStateCards();
+    }
+
+
     public void AddPlayers()
     {
+        playerList.Clear();
         playerList.Add(new Player(3, 3));
         playerList.Add(new Player(3, 10));
         playerList.Add(new Player(3, 17));
@@ -103,26 +108,7 @@ public class Game
         }
     }
 
-    public void ProgramGUI()
-    {
-        Application.Init();
-        var top = Application.Top;
-        var tframe = top.Frame;
-
-        var win = new Window("Texas HoldEm ~@G")
-        {
-            X = 0,
-            Y = 1,
-            Width = Dim.Fill(),
-            Height = Dim.Fill() - 1
-        };
-        var menu = new MenuBar(new MenuBarItem[] {
-            new MenuBarItem ("_F9", new MenuItem [] {
-                //new MenuItem ("_Open", "", null),
-                new MenuItem ("_Quit", "", () => { if (Quit ()) top.Running = false; }),
-            })
-        });
-
+    private void AddElementsGUI(Window win){
         for (int i = 0; i < 6; i++)
         {
             var playerLabel = new Label($"Player {i}")
@@ -140,6 +126,30 @@ public class Game
 
             showTableCards(win);
         }
+    }
+
+    public void ProgramGUI()
+    {
+        Application.Init();
+        var top = Application.Top;
+        var tframe = top.Frame;
+
+        var win = new Window("Texas HoldEm ~@G")
+        {
+            X = 0,
+            Y = 1,
+            Width = Dim.Fill(),
+            Height = Dim.Fill() - 1
+        };
+        var menu = new MenuBar(new MenuBarItem[] {
+            new MenuBarItem ("_F9", new MenuItem [] {
+                //new MenuItem ("_Open", "", null),
+                new MenuItem ("_Quit", "", () => { if (Quit ()) top.Running = false; }),
+                new MenuItem ("_Restart", "", () => { GameSetup(); win.RemoveAll();AddElementsGUI(win);}),
+            })
+        });
+
+        AddElementsGUI(win);
 
         top.Add(win, menu);
         top.Add(menu);
