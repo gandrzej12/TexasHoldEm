@@ -129,11 +129,11 @@ public class Game
 
             showTableCards(win);
         }
+        ChooseWinners(win);
     }
 
-    public void ChooseWinners()
+    public void ChooseWinners(Window myWin)
     {
-        throw new NotImplementedException();
         List<List<byte>> dataFromAll = new List<List<byte>>();
         foreach (var player in playerList)
         {
@@ -144,60 +144,16 @@ public class Game
             SetAnalyzer sanal = new SetAnalyzer(mergedCards);
             List<byte> levels = sanal.levelAnalyze();
             dataFromAll.Add(levels);
-        }
-        List<byte> maxLevels = new List<byte>();
-        maxLevels.Add(0);
-        maxLevels.Add(0);
-        maxLevels.Add(0);
-        maxLevels.Add(0);
-        maxLevels.Add(0);
-        maxLevels.Add(0);
-        foreach (var plevel in dataFromAll)
-        {
-            int temp = 0;
-            if (plevel[temp] >= maxLevels[temp])//0
-            {
-                maxLevels[temp] = plevel[temp];
-                temp++;
-                if (plevel[temp] >= maxLevels[temp])//1
+
+            var scoreLabel = new Label($"Levels: {levels[0]} {levels[1]} {levels[2]} {levels[3]} {levels[4]} {levels[5]}")
                 {
-                    maxLevels[temp] = plevel[temp];
-                    temp++;
-                    if (plevel[temp] >= maxLevels[temp])//2
-                    {
-                        maxLevels[temp] = plevel[temp];
-                        temp++;
-                        if (plevel[temp] >= maxLevels[temp])//3
-                        {
-                            maxLevels[temp] = plevel[temp];
-                            temp++;
-                            if (plevel[temp] >= maxLevels[temp])//4
-                            {
-                                maxLevels[temp] = plevel[temp];
-                                temp++;
-                                if (plevel[temp] >= maxLevels[temp])//5
-                                {
-                                    maxLevels[temp] = plevel[temp];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+                    X = player.PlayerPosition_X,
+                    Y = player.PlayerPosition_Y - 1
+                };
+                myWin.Add(scoreLabel);
         }
 
-        foreach(var playerData in dataFromAll){
-            if(playerData[0]==maxLevels[0] && 
-                playerData[1]==maxLevels[1] && 
-                playerData[2]==maxLevels[2] && 
-                playerData[3]==maxLevels[3] && 
-                playerData[4]==maxLevels[4] && 
-                playerData[5]==maxLevels[5]
-            ){
-                //This player is winner
-                throw new NotImplementedException();
-            }
-        }
+    
     }
 
     public void ProgramGUI()

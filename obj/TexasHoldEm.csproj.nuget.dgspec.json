@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj": {}
+    "C:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj": {}
   },
   "projects": {
-    "c:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj": {
+    "C:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj",
+        "projectUniqueName": "C:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj",
         "projectName": "TexasHoldEm",
-        "projectPath": "c:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj",
+        "projectPath": "C:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj",
         "packagesPath": "C:\\Users\\agierlak\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\obj\\",
+        "outputPath": "C:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\agierlak\\AppData\\Roaming\\NuGet\\NuGet.Config",
