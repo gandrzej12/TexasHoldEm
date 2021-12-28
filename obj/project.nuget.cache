@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tpZGj8NjF+dp0g8x2RTceqV/xf8rtk+S0hCy8QYYBW52y15jx/cGoL1/0YsoI4stbnaDRllfpGIk4m7bb9+8WA==",
+  "dgSpecHash": "4PauFDsnBgmIMZgCHFoa1qXW6oMW3VIGX+ruLuhTKRx9n6Xne0Y68zkQFXwTFiSb7aq1MsT2Zf1I0cD5+V02BA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj",
+  "projectFilePath": "c:\\Users\\agierlak\\Documents\\programowanie_test\\TexasHoldEm\\TexasHoldEm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\agierlak\\.nuget\\packages\\nstack.core\\0.16.0\\nstack.core.0.16.0.nupkg.sha512",
     "C:\\Users\\agierlak\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",

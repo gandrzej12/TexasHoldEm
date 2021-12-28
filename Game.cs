@@ -15,9 +15,10 @@ public class Game
         ProgramGUI();
     }
 
-    private void GameSetup(){
+    private void GameSetup()
+    {
         myDeck = new Deck();
-        tableCards= new List<Card>();
+        tableCards = new List<Card>();
         AddPlayers();
         TossCardsToPlayers();
         FlopStateCards();
@@ -69,7 +70,7 @@ public class Game
 
     private void showPlayerCards(int playerNumber, Card card, Window myWin, int offset)
     {
-        List<string> firstOrSecondCard= card.cardToGUI();
+        List<string> firstOrSecondCard = card.cardToGUI();
         for (int j = 0; j < firstOrSecondCard.Count; j++)
         {
             var cardRow = new Label(firstOrSecondCard[j])
@@ -87,9 +88,9 @@ public class Game
 
     private void showTableCards(Window myWin)
     {
-        int posX=50;
-        int posY=10;
-        int offset=9;
+        int posX = 50;
+        int posY = 10;
+        int offset = 9;
         for (int i = 0; i < tableCards.Count; i++)
         {
             List<string> card = tableCards[i].cardToGUI();
@@ -97,8 +98,8 @@ public class Game
             {
                 var cardRow = new Label(card[j])
                 {
-                    X = posX+ offset*i,
-                    Y = posY+j,
+                    X = posX + offset * i,
+                    Y = posY + j,
                     ColorScheme = new ColorScheme()
                     {
                         Normal = tableCards[i].CardColor
@@ -109,7 +110,8 @@ public class Game
         }
     }
 
-    private void AddElementsGUI(Window win){
+    private void AddElementsGUI(Window win)
+    {
         for (int i = 0; i < 6; i++)
         {
             var playerLabel = new Label($"Player {i}")
@@ -126,6 +128,75 @@ public class Game
             showPlayerCards(i, secondCard, win, 9);
 
             showTableCards(win);
+        }
+    }
+
+    public void ChooseWinners()
+    {
+        throw new NotImplementedException();
+        List<List<byte>> dataFromAll = new List<List<byte>>();
+        foreach (var player in playerList)
+        {
+            List<Card> mergedCards = new List<Card>();
+            mergedCards.AddRange(tableCards);
+            mergedCards.Add(player.GetFirstCard());
+            mergedCards.Add(player.GetSecondCard());
+            SetAnalyzer sanal = new SetAnalyzer(mergedCards);
+            List<byte> levels = sanal.levelAnalyze();
+            dataFromAll.Add(levels);
+        }
+        List<byte> maxLevels = new List<byte>();
+        maxLevels.Add(0);
+        maxLevels.Add(0);
+        maxLevels.Add(0);
+        maxLevels.Add(0);
+        maxLevels.Add(0);
+        maxLevels.Add(0);
+        foreach (var plevel in dataFromAll)
+        {
+            int temp = 0;
+            if (plevel[temp] >= maxLevels[temp])//0
+            {
+                maxLevels[temp] = plevel[temp];
+                temp++;
+                if (plevel[temp] >= maxLevels[temp])//1
+                {
+                    maxLevels[temp] = plevel[temp];
+                    temp++;
+                    if (plevel[temp] >= maxLevels[temp])//2
+                    {
+                        maxLevels[temp] = plevel[temp];
+                        temp++;
+                        if (plevel[temp] >= maxLevels[temp])//3
+                        {
+                            maxLevels[temp] = plevel[temp];
+                            temp++;
+                            if (plevel[temp] >= maxLevels[temp])//4
+                            {
+                                maxLevels[temp] = plevel[temp];
+                                temp++;
+                                if (plevel[temp] >= maxLevels[temp])//5
+                                {
+                                    maxLevels[temp] = plevel[temp];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach(var playerData in dataFromAll){
+            if(playerData[0]==maxLevels[0] && 
+                playerData[1]==maxLevels[1] && 
+                playerData[2]==maxLevels[2] && 
+                playerData[3]==maxLevels[3] && 
+                playerData[4]==maxLevels[4] && 
+                playerData[5]==maxLevels[5]
+            ){
+                //This player is winner
+                throw new NotImplementedException();
+            }
         }
     }
 
